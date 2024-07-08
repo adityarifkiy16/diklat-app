@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -19,8 +20,12 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login');
 });
 
-// Route::middleware('auth')->group(function () {
-//     Route::middleware('role:1,2,3')->group(function () {
-//         Route::prefix('index')->controller(UserController::class)
-//     });
-// });
+Route::middleware('auth')->group(function () {
+    Route::middleware(['role:1,2,3'])->group(function () {
+        Route::get(
+            '/dashboard',
+            DashboardController::class
+        )->name('dashboard');
+    });
+    Route::post('/logout', LogoutController::class)->name('logout');
+});
