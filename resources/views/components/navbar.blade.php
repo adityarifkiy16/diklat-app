@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="navbar-mobile">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#" class="navbar-nav-link sidebar-control sidebar-main-hide d-none d-md-block">
+                <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
                     <i class="icon-paragraph-justify3"></i>
                 </a>
             </li>
@@ -40,10 +40,21 @@
 
         <ul class="navbar-nav ml-md-auto">
             <li class="nav-item dropdown">
-                <a href="other_changelog.html" class="navbar-nav-link">
-                    <i class="icon-user mr-2"></i>
-                    <span class="d-sm-inline d-none">{{ Auth::user()->name }}</span>
+                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                    <img src="{{asset('assets/images/user-default.jpg')}}" class="rounded-circle mr-2" height="34" alt="">
+                    <span>{{Auth::user()->username}}</span>
                 </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="https://starlax.noretest2.com/changepass" class="dropdown-item"><i class="icon-cog5"></i> Ganti Password</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">
+                            <i class="icon-switch2"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
             </li>
         </ul>
     </div>
