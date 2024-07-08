@@ -1,18 +1,26 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 
 Route::get('/', function () {
-    if (auth()->check()) {
-        return '/dashboard';
+    if (Auth::check()) {
+        return redirect('/dashboard'); // Redirect to the dashboard or any other page
     } else {
-        return '/login';
+        return redirect('/login');
     }
 });
 
-Route::middleware('auth')->group(function () {
-    Route::middleware('role:1,2,3')->group(function () {
-        Route::controller()
-    });
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login');
+    Route::post('/login', 'login');
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::middleware('role:1,2,3')->group(function () {
+//         Route::prefix('index')->controller(UserController::class)
+//     });
+// });
