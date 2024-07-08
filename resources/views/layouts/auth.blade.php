@@ -17,8 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/components.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/colors.min.css') }}">
 
-    <!-- animate css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/extras/animate.min.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
@@ -37,7 +36,7 @@
 
     <!-- core JS -->
     <script src="{{asset('assets/js/main/jquery.min.js')}}"></script>t
-    <script src="{{asset('assets/js/main/bootstrap.bundle.min.js')}}"></script>t
+    <script src="{{asset('assets/js/main/bootstrap.bundle.min.js')}}"></script>
     @stack('script')
 </body>
 
