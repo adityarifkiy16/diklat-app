@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #005C78;">
     <div class="page-content">
         <div class="content-wrapper">
             <!-- Content area -->
