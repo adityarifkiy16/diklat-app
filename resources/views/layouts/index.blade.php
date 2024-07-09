@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/colors.min.css') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
 </head>
 
 <body>
@@ -38,6 +40,7 @@
     <!-- core JS -->
     <script src="{{asset('assets/js/main/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/main/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/app.js')}}"></script>
     @stack('script')
 </body>

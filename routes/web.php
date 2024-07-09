@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PesertaController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
             '/dashboard',
             DashboardController::class
         )->name('dashboard');
+
+        Route::controller(PesertaController::class)->group(function () {
+            Route::get('/peserta', 'index');
+        });
     });
     Route::post('/logout', LogoutController::class)->name('logout');
 });
