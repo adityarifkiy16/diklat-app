@@ -40,8 +40,12 @@
     <!-- core JS -->
     <script src="{{asset('assets/js/main/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/main/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Theme JS files -->
     <script src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/form/selects/select2.min.js')}}"></script>
     <script src="{{asset('assets/js/app.js')}}"></script>
+
     @stack('script')
 </body>
 

@@ -9,7 +9,8 @@ class PesertaController extends Controller
 {
     public function index()
     {
-        $arr['peserta'] = MPeserta::with('user')->get();
-        return view('peserta.index', $arr['peserta']);
+        $peserta = MPeserta::with('user')->get();
+        dd($peserta);
+        return view('peserta.index', $peserta);
     }
 }

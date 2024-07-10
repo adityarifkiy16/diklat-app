@@ -17,11 +17,11 @@ class MPeserta extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function diklat()
     {
-        $this->belongsToMany(MDiklat::class, 'TDiklat_peserta', 'peserta_id', 'diklat_id');
+        return $this->belongsToMany(MDiklat::class, 'TDiklat_peserta', 'peserta_id', 'diklat_id');
     }
 }
