@@ -26,7 +26,7 @@ class MPesertaSeeder extends Seeder
                 'nomer_telp' => '08123456789',
                 'profesi' => 'Engineer',
                 'gender' => 'Male',
-                'user_id' => 2, // Replace with an existing user_id
+                'user_id' => 4, // Replace with an existing user_id
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -39,7 +39,7 @@ class MPesertaSeeder extends Seeder
                 'nomer_telp' => '0876543210',
                 'profesi' => 'Doctor',
                 'gender' => 'Female',
-                'user_id' => 3, // Replace with an existing user_id
+                'user_id' => 5, // Replace with an existing user_id
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

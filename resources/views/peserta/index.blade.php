@@ -8,24 +8,25 @@
             <div class="list-icons mr-2">
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
-            <a href="https://starlax.noretest2.com/users/create"><button type="button" class="btn btn-success rounded-round"><i class="icon-add mr-2"></i> Tambah</button></a>
+            <a href="#"><button type="button" class="btn btn-success rounded-round"><i class="icon-add mr-2"></i> Tambah</button></a>
         </div>
     </div>
-    <div class="table-responsive table-hover">
-        <table class="table table-bordered datatable-basic">
+    <div class="table-responsive">
+        <table class="table table-hover datatable-basic">
             <thead>
                 <tr>
-                    <th style="width:5%;">No</th>
-                    <th style="width:20%;">Nama</th>
-                    <th style="width:15%;">TTL</th>
-                    <th style="width:20%;">Nama Ibu</th>
-                    <th style="width:15%;">No Telp</th>
-                    <th style="width:10%;">Profesi</th>
-                    <th style="width:10%;">Jenis Kelamin</th>
-                    <th style="width:5%; text-align: center;">Actions</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>TTL</th>
+                    <th>Nama Ibu</th>
+                    <th>No Telp</th>
+                    <th>Profesi</th>
+                    <th>Jenis Kelamin</th>
+                    <th style="text-align: center;">Actions</th>
                 </tr>
             </thead>
-
+            <tbody>
+            </tbody>
         </table>
     </div>
 </div>
@@ -33,9 +34,9 @@
 @endsection
 @push('script')
 <script>
+    // datatable
     var DatatableBasic = function() {
 
-        // Basic Datatable examples
         var _componentDatatableBasic = function() {
             if (!$().DataTable) {
                 console.warn('Warning - datatables.min.js is not loaded.');
@@ -48,7 +49,7 @@
                 columnDefs: [{
                     orderable: false,
                     width: 100,
-                    targets: [7]
+                    targets: [6]
                 }],
                 dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
                 language: {
@@ -64,7 +65,7 @@
                 }
             });
 
-            let datas = [{
+            let columns = [{
                     data: 'DT_RowIndex',
                     name: 'no'
                 },
@@ -73,10 +74,8 @@
                 },
                 {
                     data: null,
-                    render: function(data, type, row) {
-                        ttl = data?.peserta?.tempat_lahir + ' - (' + data?.peserta?.tanggal_lahir + ')'
-                        return ttl
-
+                    render: function(data) {
+                        return data.tempat_lahir + ' - (' + data.tanggal_lahir + ')';
                     }
                 },
                 {
@@ -89,38 +88,36 @@
                     data: 'profesi'
                 },
                 {
-                    data: null,
-                    render: function(data, type, row) {
-                        gender = data?.peserta?.gender
-                        return gender
-                    }
+                    data: 'gender'
                 },
                 {
                     data: null,
-                    render: function(data, type, row) {
-                        let html = '';
-                        html += `
-                            <div style="text-align:center">
-                                <a href="#"><button type="button" class="btn btn-primary btn-icon"><i class="icon-pencil7" title="Edit"></i></button></a>
-                                <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="#"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
-                            </div>`;
-                        return html
+                    render: function(data) {
+                        return `
+                    <div style="text-align:center">
+                        <a href="#"><button type="button" class="btn btn-primary btn-icon"><i class="icon-pencil7" title="Edit"></i></button></a>
+                        <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="#"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
+                    </div>`;
                     }
                 }
             ];
 
             // Basic datatable
             $('.datatable-basic').DataTable({
-                'scrollX': true,
+                scrollX: true,
+                scrollCollapse: true,
                 processing: true,
-                serverSide: true,
+                serverSide: false,
                 ajax: {
-                    url: "https://starlax.noretest2.com/users-datatable",
+                    url: "{{url('/peserta')}}",
                     type: "GET",
+                    dataSrc: function(response) {
+                        return response.data;
+                    }
                 },
-                columns: datas,
-                "order": [
-                    [0, "desc"]
+                columns: columns,
+                order: [
+                    [1, "desc"]
                 ],
             });
 
@@ -152,25 +149,18 @@
             });
         };
 
-        // Select2 for length menu styling
         var _componentSelect2 = function() {
             if (!$().select2) {
                 console.warn('Warning - select2.min.js is not loaded.');
                 return;
             }
 
-            // Initialize
             $('.dataTables_length select').select2({
                 minimumResultsForSearch: Infinity,
                 dropdownAutoWidth: true,
                 width: 'auto'
             });
         };
-
-
-        //
-        // Return objects assigned to module
-        //
 
         return {
             init: function() {
@@ -179,9 +169,6 @@
             }
         }
     }();
-
-    // Initialize module
-    // ------------------------------
 
     document.addEventListener('DOMContentLoaded', function() {
         DatatableBasic.init();

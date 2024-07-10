@@ -43,7 +43,7 @@
 
     <!-- Theme JS files -->
     <script src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
-    <script src="{{asset('assets/js/plugins/form/selects/select2.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
     <script src="{{asset('assets/js/app.js')}}"></script>
 
     @stack('script')

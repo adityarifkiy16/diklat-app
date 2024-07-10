@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role_id' => 3
+                'role_id' => 2
             ],
             [
                 'username' => 'Jane',
@@ -36,10 +36,8 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'role_id' => 3
+                'role_id' => 2
             ],
-
-            // Add more dummy users as needed
         ];
 
         // Insert dummy users into database
