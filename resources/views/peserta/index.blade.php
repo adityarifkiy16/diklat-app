@@ -22,7 +22,7 @@
                     <th>No Telp</th>
                     <th>Profesi</th>
                     <th>Jenis Kelamin</th>
-                    <th style="text-align: center;">Actions</th>
+                    <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
                     width: 100,
                     targets: [6]
                 }],
-                dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+                dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
                 language: {
                     search: '<span>Search:</span> _INPUT_',
                     searchPlaceholder: 'Type to search...',
@@ -103,9 +103,8 @@
             ];
 
             // Basic datatable
-            $('.datatable-basic').DataTable({
+            var table = $('.datatable-basic').DataTable({
                 scrollX: true,
-                scrollCollapse: true,
                 processing: true,
                 serverSide: false,
                 ajax: {
@@ -135,12 +134,6 @@
             // Datatable with saving state
             $('.datatable-save-state').DataTable({
                 stateSave: true
-            });
-
-            // Scrollable datatable
-            var table = $('.datatable-scroll-y').DataTable({
-                autoWidth: true,
-                scrollY: 300
             });
 
             // Resize scrollable table when sidebar width changes
