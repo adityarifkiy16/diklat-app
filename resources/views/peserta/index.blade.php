@@ -31,6 +31,29 @@
     </div>
 </div>
 <!-- /bordered table -->
+<!-- Danger modal -->
+<div id="modal_theme_danger" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger-600">
+                <h6 class="modal-title font-weight-bold">Konfirmasi Hapus</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form action="" method="post" id="delform">
+                @method('DELETE')
+                <div class="modal-body" align="center">
+                    <h2> Hapus User? </h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn bg-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- dangermodal -->
 @endsection
 @push('script')
 <script>
@@ -96,7 +119,7 @@
                         return `
                     <div style="text-align:center">
                         <a href="#"><button type="button" class="btn btn-primary btn-icon"><i class="icon-pencil7" title="Edit"></i></button></a>
-                        <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="#"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
+                        <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="{{url('/peserta/delete/${data.id}')}}"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
                     </div>`;
                     }
                 }
@@ -165,6 +188,69 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         DatatableBasic.init();
+    });
+</script>
+<script>
+    $(document).on("click", ".delbutton", function() {
+        var url = $(this).data('uri');
+        $("#delform").attr("action", url);
+    });
+
+    $('#delform').submit(function(event) {
+        event.preventDefault();
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showClass: {
+                popup: `
+            animate__animated
+            animate__fadeInDown
+            animate__faster
+            `
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        let form = $(this);
+        let token = $('meta[name="csrf-token"]').attr('content');
+        let actionUrl = form.attr('action');
+
+        $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            success: function(response) {
+                if (response.code === 200) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: response.data.message
+                    });
+                    $('.datatable-basic').DataTable().ajax.reload();
+                    $('#modal_theme_danger').modal('hide');
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Failed to delete the participant'
+                    });
+                }
+            },
+            error: function(xhr) {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'An error occurred while deleting the participant'
+                });
+            }
+        });
     });
 </script>
 @endpush
