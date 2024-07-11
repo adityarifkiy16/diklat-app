@@ -28,8 +28,9 @@ Route::middleware('auth')->group(function () {
             DashboardController::class
         )->name('dashboard');
 
-        Route::controller(PesertaController::class)->group(function () {
-            Route::get('/peserta', 'index');
+        Route::controller(PesertaController::class)->prefix('peserta')->group(function () {
+            Route::get('/', 'index');
+            Route::delete('/delete/{id}', 'deletePeserta');
         });
     });
     Route::post('/logout', LogoutController::class)->name('logout');

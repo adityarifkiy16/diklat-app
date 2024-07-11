@@ -15,10 +15,17 @@ class PesertaController extends Controller
 
             return DataTables::eloquent($peserta)
                 ->addIndexColumn()
-                ->removeColumn('id')
                 ->toJson();
         }
 
         return view('peserta.index');
+    }
+
+    public function deletePeserta($id)
+    {
+        $peserta = MPeserta::findorFail($id);
+        $peserta->delete();
+
+        return response()->json(['code' => 200, 'data' => ['message' => 'berhasil menghapus data']]);
     }
 }
