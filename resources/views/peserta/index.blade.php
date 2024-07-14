@@ -33,26 +33,25 @@
 <!-- /bordered table -->
 <!-- Danger modal -->
 <div id="modal_theme_danger" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-header bg-danger-600">
-                <h6 class="modal-title font-weight-bold">Konfirmasi Hapus</h6>
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-bold">Hapus Peserta</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <form action="" method="post" id="delform">
                 @method('DELETE')
-                <div class="modal-body" align="center">
-                    <h2> Hapus User? </h2>
+                <div class="modal-body">
+                    <h5 class="text-muted">Data<span class="name-peserta"></span>akan dihapus secara permanen. Yakin ingin menghapus?</h5>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn bg-danger">Delete</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 <!-- dangermodal -->
 @endsection
 @push('script')
@@ -119,7 +118,7 @@
                         return `
                     <div style="text-align:center">
                         <a href="#"><button type="button" class="btn btn-primary btn-icon"><i class="icon-pencil7" title="Edit"></i></button></a>
-                        <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="{{url('/peserta/delete/${data.id}')}}"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
+                        <a class="delbutton" data-toggle="modal" data-target="#modal_theme_danger" data-uri="{{url('/peserta/delete/${data.id}')}}" data-peserta="${data.name}"><button type="button" class="btn btn-danger btn-icon"><i class="icon-x" title="Delete"></i></button></a>
                     </div>`;
                     }
                 }
@@ -193,7 +192,9 @@
 <script>
     $(document).on("click", ".delbutton", function() {
         var url = $(this).data('uri');
+        var name = $(this).data('peserta')
         $("#delform").attr("action", url);
+        $(".name-peserta").text(" " + name + " ");
     });
 
     $('#delform').submit(function(event) {
