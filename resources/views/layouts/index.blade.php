@@ -43,9 +43,16 @@
     <script src="{{asset('assets/js/main/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Theme JS files -->
+    <script src="{{asset('assets/js/plugins/ui/moment/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/pickers/anytime.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/pickers/pickadate/picker.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/pickers/pickadate/picker.date.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/pickers/daterangepicker.js')}}"></script>
+    <script src="{{asset('assets/js/demo/select2.js')}}"></script>
     <script src="{{asset('assets/js/app.js')}}"></script>
+    <script src="{{asset('assets/js/demo/picker_date.js')}}"></script>
 
     @stack('script')
 </body>

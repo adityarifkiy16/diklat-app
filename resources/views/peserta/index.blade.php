@@ -8,7 +8,7 @@
             <div class="list-icons mr-2">
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
-            <a href="#"><button type="button" class="btn btn-success rounded-round"><i class="icon-add mr-2"></i> Tambah</button></a>
+            <a href="{{route('peserta.create')}}"><button type="button" class="btn btn-success rounded-round"><i class="icon-add mr-2"></i> Tambah</button></a>
         </div>
     </div>
     <div class="table-responsive">
@@ -97,7 +97,7 @@
                 {
                     data: null,
                     render: function(data) {
-                        return data.tempat_lahir + ' - (' + data.tanggal_lahir + ')';
+                        return data.tempatlahir.name + ' - (' + data.tanggal_lahir + ')';
                     }
                 },
                 {
@@ -133,6 +133,7 @@
                     url: "{{url('/peserta')}}",
                     type: "GET",
                     dataSrc: function(response) {
+                        console.log(response);
                         return response.data;
                     }
                 },

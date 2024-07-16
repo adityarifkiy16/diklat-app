@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\MRegency;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MPeserta extends Model
 {
@@ -13,7 +14,7 @@ class MPeserta extends Model
 
     protected $table = 'MPeserta';
 
-    protected $guarded = 'id';
+    protected $guarded = ['id'];
 
     public function user()
     {
@@ -23,5 +24,10 @@ class MPeserta extends Model
     public function diklat()
     {
         return $this->belongsToMany(MDiklat::class, 'TDiklat_peserta', 'peserta_id', 'diklat_id');
+    }
+
+    public function tempatlahir()
+    {
+        return $this->belongsTo(MRegency::class, 'tempat_lahir', 'id');
     }
 }

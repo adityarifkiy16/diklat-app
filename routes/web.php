@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\WilayahController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -29,8 +30,16 @@ Route::middleware('auth')->group(function () {
         )->name('dashboard');
 
         Route::controller(PesertaController::class)->prefix('peserta')->group(function () {
-            Route::get('/', 'index');
+            Route::get('/', 'index')->name('peserta');
+            Route::get('/create', 'create')->name('peserta.create');
+            Route::post('/store', 'store')->name('peserta.store');
             Route::delete('/delete/{id}', 'deletePeserta');
+        });
+
+        Route::controller(WilayahController::class)->prefix('wilayah')->group(function () {
+            Route::get('/get-provinces', 'getProv')->name('get.provinces');
+            Route::get('/get-kotaprov', 'getKotaProv')->name('get.kotaprov');
+            Route::get('/get-kota', 'getKota')->name('get.kota');
         });
     });
     Route::post('/logout', LogoutController::class)->name('logout');
