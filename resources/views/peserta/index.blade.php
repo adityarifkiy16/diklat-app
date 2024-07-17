@@ -17,7 +17,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>TTL</th>
+                    <th>Tempat Lahir</th>
+                    <th>Tanggal Lahir</th>
                     <th>Nama Ibu</th>
                     <th>No Telp</th>
                     <th>Profesi</th>
@@ -97,7 +98,13 @@
                 {
                     data: null,
                     render: function(data) {
-                        return data.tempatlahir.name + ' - (' + data.tanggal_lahir + ')';
+                        return data.tempatlahir.name;
+                    }
+                },
+                {
+                    data: null,
+                    render: function(data) {
+                        return data.tanggal_lahir;
                     }
                 },
                 {
