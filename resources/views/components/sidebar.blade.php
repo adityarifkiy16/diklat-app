@@ -27,7 +27,7 @@
                     <div class="text-uppercase font-size-xs line-height-xs">Menu</div> <i class="icon-menu"></i>
                 </li>
                 <!-- body sidebar -->
-                <li class="nav-item"><a href="index.html" class="nav-link"><i class="icon-user"></i><span>Master User</span></a></li>
+                <li class="nav-item"><a href="{{url('/user')}}" class="nav-link"><i class="icon-user"></i><span>Master User</span></a></li>
                 <li class="nav-item"><a href="{{url('/peserta')}}" class="nav-link"><i class="icon-user"></i><span>Master Peserta</span></a></li>
                 <li class="nav-item"><a href="index.html" class="nav-link"><i class="icon-task"></i><span>Master Diklat</span></a></li>
             </ul>
