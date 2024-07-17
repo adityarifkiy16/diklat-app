@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label>Masukan nomer telpon:</label>
-                            <input name="nomer_telp" type="text" class="form-control" placeholder="08xxxxxxxxx">
+                            <input name="nomer_telp" type="number" class="form-control" placeholder="08xxxxxxxxx">
                         </div>
 
 
@@ -48,7 +48,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <label>Tempat Lahir:</label>
-                                    <select name="kota" id="datakota" class="form-control select-search">
+                                    <select name="kota" id="datakota" class="form-control select-search" required>
                                         <option value="">Pilih Kota</option>
                                     </select>
                                 </div>
@@ -59,7 +59,7 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                                         </span>
-                                        <input name="tanggal_lahir" type="text" class="form-control daterange-single" value="03/18/2013">
+                                        <input name="tanggal_lahir" type="text" class="form-control daterange-single">
                                     </div>
                                 </div>
                             </div>
@@ -97,6 +97,7 @@
 
 
             <div class="text-right">
+                <a href="{{ route('peserta') }}" class="btn bg-grey">Cancel <i class="icon-reset ml-2"></i></a>
                 <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
             </div>
         </form>
@@ -138,8 +139,7 @@
 
                 // Populate provinces select box
                 $.each(kota, function(index, kota) {
-                    options += '<option value="' + kota.id + '">' + kota.name + "(" +
-                        kota.id + ")" + '</option>';
+                    options += '<option value="' + kota.id + '">' + kota.name + '</option>';
                 });
 
                 $('#datakota').append(options);
@@ -149,43 +149,139 @@
             }
         });
 
-        $("#tambah-peserta").submit(function(e) {
-            e.preventDefault();
-            // Get form data
-            let formData = $(this).serialize();
-            let token = $('meta[name="csrf-token"]').attr('content');
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': token
-                },
-                data: formData,
-                success: function(response) {
-                    if (response.code === 200) {
-                        Toast.fire({
-                            icon: "success",
-                            title: response.message
-                        }).then(function() {
-                            window.location = '{{route("peserta")}}'
-                        });
-                    } else {
-                        Toast.fire({
-                            icon: "error",
-                            title: 'Unexpected Errors'
-                        });
+        $(document).ready(function() {
+            $("#tambah-peserta").validate({
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    nama_ibu: {
+                        required: true
+                    },
+                    nomer_telp: {
+                        required: true,
+                        number: true
+                    },
+                    profesi: {
+                        required: true
+                    },
+                    gender: {
+                        required: true,
+                    },
+                    kota: {
+                        required: true
+                    },
+                    tanggalLahir: {
+                        required: true,
+                        date: true
+                    },
+                    alamat: {
+                        required: true
+                    },
+                    username: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
                     }
                 },
-                error: function(xhr) {
-                    let errorMessage = xhr.responseJSON.message ? xhr.responseJSON.message : 'An error occurred';
-                    Toast.fire({
-                        icon: "error",
-                        title: errorMessage
+                messages: {
+                    name: {
+                        required: "This field is required",
+                        minlength: "Your name must be at least 2 characters long"
+                    },
+                    email: {
+                        required: "This field is required",
+                        email: "Please enter a valid email address"
+                    },
+                    nama_ibu: {
+                        required: "This field is required",
+                    },
+                    nomer_telp: {
+                        required: "This field is required",
+                        number: 'Please enter a valid number.'
+                    },
+                    profesi: {
+                        required: "This field is required"
+                    },
+                    gender: {
+                        required: "This field is required",
+                    },
+                    kota: {
+                        required: "This field is required"
+                    },
+                    tanggal_lahir: {
+                        required: "This field is required",
+                        date: 'Please enter a valid date'
+                    },
+                    alamat: {
+                        required: "This field is required"
+                    },
+                    username: {
+                        required: "This field is required"
+                    },
+                    password: {
+                        required: "This field is required",
+                        minlength: "Your password must be at least 8 characters long"
+                    }
+                },
+                errorElement: "span",
+                errorClass: "form-text text-danger",
+                errorPlacement: function(error, element) {
+                    var container = $(element).closest('.form-group');
+                    container.append(error);
+                },
+                highlight: function(element) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function(element) {
+                    $(element).removeClass("is-invalid");
+                },
+                submitHandler: function(form) {
+                    $('.form-text text-danger').remove();
+
+                    let formData = $(form).serialize();
+                    let token = $('meta[name="csrf-token"]').attr('content');
+
+                    $.ajax({
+                        url: $(form).attr('action'),
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': token
+                        },
+                        data: formData,
+                        success: function(response) {
+                            if (response.code === 200) {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: response.message
+                                }).then(function() {
+                                    window.location = '{{route("peserta")}}';
+                                });
+                            } else {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: 'Unexpected Errors'
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            let errorMessage = xhr.responseJSON.message ? xhr.responseJSON.message : 'An error occurred';
+                            Toast.fire({
+                                icon: "error",
+                                title: errorMessage
+                            });
+                        }
                     });
                 }
             });
         });
+
     })
 </script>
 @endpush
