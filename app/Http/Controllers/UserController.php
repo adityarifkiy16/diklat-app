@@ -59,7 +59,7 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         $user = User::findorFail($id);
-        if ($user->peserta()) {
+        if ($user->peserta()->exists()) {
             return response()->json([
                 'code' => 400,
                 'data' => [
