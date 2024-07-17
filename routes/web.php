@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
 
 Route::get('/', function () {
@@ -40,6 +41,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/get-provinces', 'getProv')->name('get.provinces');
             Route::get('/get-kotaprov', 'getKotaProv')->name('get.kotaprov');
             Route::get('/get-kota', 'getKota')->name('get.kota');
+        });
+
+        Route::controller(UserController::class)->prefix('user')->group(function () {
+            Route::get('/', 'index')->name('user');
+            Route::get('/create', 'create')->name('user.create');
+            Route::post('/store', 'store')->name('user.store');
+            Route::delete('/delete/{id}', 'deleteUser');
         });
     });
     Route::post('/logout', LogoutController::class)->name('logout');
