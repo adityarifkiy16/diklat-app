@@ -12,10 +12,10 @@ class MRole extends Model
 
     protected $table = 'MRole';
 
-    protected $guarded = 'id';
+    protected $guarded = ['id'];
 
     public function users()
     {
-        $this->hasOne(User::class);
+        $this->hasMany(User::class);
     }
 }
