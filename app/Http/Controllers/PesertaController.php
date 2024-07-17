@@ -19,6 +19,10 @@ class PesertaController extends Controller
             $peserta = MPeserta::with('tempatlahir');
             return DataTables::eloquent($peserta)
                 ->addIndexColumn()
+                ->editColumn('tanggal_lahir', function ($row) {
+                    Carbon::setLocale('id');
+                    return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
+                })
                 ->toJson();
         }
 
