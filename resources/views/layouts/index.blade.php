@@ -46,6 +46,7 @@
     <script src="{{asset('assets/js/plugins/ui/moment/moment.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/tables/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/forms/selects/select2.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/forms/validation/validate.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/pickers/anytime.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/pickers/pickadate/picker.js')}}"></script>
     <script src="{{asset('assets/js/plugins/pickers/pickadate/picker.date.js')}}"></script>
