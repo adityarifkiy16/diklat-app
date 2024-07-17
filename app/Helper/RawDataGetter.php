@@ -11,7 +11,7 @@ class RawDataGetter
      *
      * @return string
      */
-    protected static $path = __DIR__ . '/data';
+    protected static $path = __DIR__ . '/../data';
 
     /**
      * Get provinces data.
