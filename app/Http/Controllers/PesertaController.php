@@ -36,7 +36,7 @@ class PesertaController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'nama_ibu' => 'required|string|max:255',
-            'nomer_telp' => 'required|string|max:16',
+            'nomer_telp' => 'required|string|max:16|regex:/^[^eE]*$/',
             'profesi' => 'required|string|max:255',
             'gender' => 'required|in:0,1',
             'kota' => 'required|exists:MRegencies,id',
