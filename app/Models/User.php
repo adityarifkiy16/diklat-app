@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\MRole;
+use App\Models\MPeserta;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,6 +38,11 @@ class User extends Authenticatable
 
     public function roles()
     {
-        $this->belongsTo(MRole::class);
+        return $this->belongsTo(MRole::class, 'role_id', 'id');
+    }
+
+    public function peserta()
+    {
+        return $this->hasOne(MPeserta::class);
     }
 }
