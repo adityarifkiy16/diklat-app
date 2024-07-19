@@ -1,17 +1,9 @@
 <!-- Main navbar -->
-<div class="navbar navbar-expand-md navbar-light">
-    <div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
-        <div class="navbar-brand navbar-brand-md">
-            <a href="index.html" class="d-inline-block">
-                <img src="assets/images/logo_light.png" alt="">
-            </a>
-        </div>
-
-        <div class="navbar-brand navbar-brand-xs">
-            <a href="index.html" class="d-inline-block">
-                <img src="assets/images/logo_icon_light.png" alt="">
-            </a>
-        </div>
+<div class="navbar navbar-expand-md navbar-dark">
+    <div class="navbar-brand">
+        <a href="index.html" class="d-inline-block">
+            <img src="assets/images/logo_light.png" alt="">
+        </a>
     </div>
 
     <!-- Mobile button -->
@@ -32,7 +24,7 @@
     <div class="collapse navbar-collapse" id="navbar-mobile">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+                <a href="#" class="navbar-nav-link sidebar-control sidebar-main-hide d-none d-md-block">
                     <i class="icon-paragraph-justify3"></i>
                 </a>
             </li>
@@ -40,8 +32,8 @@
 
         <ul class="navbar-nav ml-md-auto">
             <li class="nav-item dropdown">
-                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{asset('assets/images/user-default.jpg')}}" class="rounded-circle mr-2" height="34" alt="">
+                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle py-0" data-toggle="dropdown">
+                    <img src="{{asset('assets/images/user-default.jpg')}}" class="rounded-circle mr-2" width="30" height="30" alt="">
                     <span>{{Auth::user()->username}}</span>
                 </a>
 
