@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MPeserta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MDiklat extends Model
 {
@@ -12,10 +13,10 @@ class MDiklat extends Model
 
     protected $table = 'MDiklat';
 
-    protected $guarded = 'id';
+    protected $guarded = ['id'];
 
     public function peserta()
     {
-        $this->belongsToMany(MPeserta::class, 'TDiklat_peserta', 'diklat_id', 'peserta_id');
+        return $this->belongsToMany(MPeserta::class, 'TDiklat_peserta', 'diklat_id', 'peserta_id');
     }
 }
