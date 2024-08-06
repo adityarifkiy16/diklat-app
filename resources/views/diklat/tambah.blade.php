@@ -14,6 +14,10 @@
                             <label>Masukan Diklat:</label>
                             <input name="diklat" type="text" class="form-control" placeholder="Nama Diklat">
                         </div>
+                        <div class="form-group">
+                            <label>Masukan Ruangan:</label>
+                            <input name="room" type="text" class="form-control" placeholder="Nama Ruangan">
+                        </div>
                     </fieldset>
                 </div>
             </div>
@@ -55,9 +59,15 @@
                     diklat: {
                         required: true
                     },
+                    room: {
+                        required: true
+                    }
                 },
                 messages: {
                     diklat: {
+                        required: "This field is required"
+                    },
+                    room: {
                         required: "This field is required"
                     },
 

@@ -17,6 +17,7 @@
                 <tr>
                     <th>No</th>
                     <th>Diklat</th>
+                    <th>Ruangan</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -66,7 +67,7 @@
                 columnDefs: [{
                     orderable: false,
                     width: 100,
-                    targets: [2]
+                    targets: [3]
                 }],
                 dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
                 language: {
@@ -88,6 +89,9 @@
                 },
                 {
                     data: 'name'
+                },
+                {
+                    data: 'room'
                 },
                 {
                     data: null,
