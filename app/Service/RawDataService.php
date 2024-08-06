@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Helper;
+namespace App\Service;
 
 use ParseCsv\Csv;
+use App\Interfaces\RawDataInterface;
 
-class RawDataGetter
+class RawDataService implements RawDataInterface
 {
     /**
      * Raw Data file path.
      *
      * @return string
      */
-    protected static $path = __DIR__ . '/../data';
+    protected static $path = __DIR__ . '/../Data';
 
     /**
      * Get provinces data.
      *
      * @return array
      */
-    public static function getProvinces()
+    public function getProvinces()
     {
         $result = self::getCsvData(self::$path . '/provinces.csv');
         foreach ($result as &$row) {
@@ -34,7 +35,7 @@ class RawDataGetter
      *
      * @return array
      */
-    public static function getRegencies()
+    public function getRegencies()
     {
         $result = self::getCsvData(self::$path . '/regencies.csv');
         foreach ($result as &$row) {
@@ -51,7 +52,7 @@ class RawDataGetter
      *
      * @return array
      */
-    public static function getDistricts()
+    public function getDistricts()
     {
         $result = self::getCsvData(self::$path . '/districts.csv');
 
@@ -72,7 +73,7 @@ class RawDataGetter
      *
      * @return array
      */
-    public static function getVillages()
+    public function getVillages()
     {
         $result = self::getCsvData(self::$path . '/villages.csv');
 
