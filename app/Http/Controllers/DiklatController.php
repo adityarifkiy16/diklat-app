@@ -14,7 +14,7 @@ class DiklatController extends Controller
             $diklat = MDiklat::query();
             return DataTables::eloquent($diklat)
                 ->addIndexColumn()
-                ->only(['id', 'name'])
+                ->only(['id', 'name', 'room'])
                 ->toJson();
         }
 
@@ -30,10 +30,12 @@ class DiklatController extends Controller
     {
         $data = $request->validate([
             'diklat' => 'required|string|max:255|unique:MDiklat,name',
+            'room' => 'required|string|max:255|unique:MDiklat,room',
         ]);
 
         MDiklat::create([
             'name' => $data['diklat'],
+            'room' => $data['room'],
         ]);
 
         return response()->json(
