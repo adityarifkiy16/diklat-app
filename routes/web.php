@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiklatController;
+use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
@@ -49,6 +50,12 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'create')->name('user.create');
             Route::post('/store', 'store')->name('user.store');
             Route::delete('/delete/{id}', 'deleteUser');
+        });
+
+        Route::controller(PenjadwalanController::class)->prefix('penjadwalan')->group(function () {
+            Route::get('/', 'index')->name('penjadwalan');
+            Route::get('/create', 'create')->name('penjadwalan.create');
+            Route::post('/store', 'store')->name('penjadwalan.store');
         });
 
         Route::controller(DiklatController::class)->prefix('diklat')->group(function () {
