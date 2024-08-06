@@ -2,7 +2,7 @@
 <div class="navbar navbar-expand-md navbar-dark">
     <div class="navbar-brand">
         <a href="index.html" class="d-inline-block">
-            <img src="assets/images/logo_light.png" alt="">
+            <img src="{{ asset('assets/images/logo_light.png') }}" alt="logo-image">
         </a>
     </div>
 
@@ -10,7 +10,7 @@
     <div class="d-flex flex-1 d-md-none">
         <div class="navbar-brand mr-auto">
             <a href="index.html" class="d-inline-block">
-                <img src="assets/images/logo_dark.png" alt="">
+                <img src="{{ asset('assets/images/logo_dark.png') }}" alt="logo-image">
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
