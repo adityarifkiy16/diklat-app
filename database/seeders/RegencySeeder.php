@@ -2,20 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Helper\RawDataGetter;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Interfaces\RawDataInterface;
 
 class RegencySeeder extends Seeder
 {
+    protected $rawData;
+
+    // spesifik tipe param sesuai binding/singleton service provider
+    public function __construct(RawDataInterface $rawData)
+    {
+        $this->rawData = $rawData;
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
         // Get Data
-        $regencies = RawDataGetter::getRegencies();
+        $regencies = $this->rawData->getRegencies();
 
 
         // Insert Data to Database

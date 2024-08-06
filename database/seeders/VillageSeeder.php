@@ -2,19 +2,27 @@
 
 namespace Database\Seeders;
 
-use App\Helper\RawDataGetter;
+use App\Interfaces\RawDataInterface;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class VillageSeeder extends Seeder
 {
+
+    protected $rawData;
+
+    public function __construct(RawDataInterface $rawData)
+    {
+        $this->rawData = $rawData;
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
         // Get Data
-        $villages = RawDataGetter::getVillages();
+        $villages = $this->rawData->getVillages();
 
         // Insert Data with Chunk
         DB::transaction(function () use ($villages) {
