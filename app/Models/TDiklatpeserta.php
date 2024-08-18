@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TDiklatpeserta extends Model
 {
     use HasFactory;
+
+    protected $table = 'TDiklat_peserta';
 }
