@@ -9,12 +9,14 @@ use App\Models\MPeserta;
 use App\Models\MProvince;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class PesertaController extends Controller
 {
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $peserta = MPeserta::with('tempatlahir');
             return DataTables::eloquent($peserta)
@@ -46,8 +48,8 @@ class PesertaController extends Controller
             'kota' => 'required|exists:MRegencies,id',
             'tanggal_lahir' => 'required|date_format:m/d/Y',
             'alamat' => 'required|string',
-            'username' => 'required|string|unique:users,username|max:255',
-            'email' => 'required|email',
+            'username' => ['required', 'string', 'max:255',  Rule::unique('users', 'username')->whereNull('deleted_at')],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => 'required|string|min:8',
         ]);
 
