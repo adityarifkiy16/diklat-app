@@ -13,20 +13,20 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $roles = MRole::where('id', "!=", 1)->get();
         if ($request->ajax()) {
             $user = User::with('roles');
             return DataTables::eloquent($user)
                 ->addIndexColumn()
                 ->toJson();
         }
-
-        return view('user.index');
+        return view('master.user.index', ["roles" => $roles]);
     }
 
     public function create()
     {
         $role = MRole::all();
-        return view('user.tambah', ['roles' => $role]);
+        return view('master.user.tambah', ['roles' => $role]);
     }
 
     public function store(Request $request)
@@ -73,5 +73,43 @@ class UserController extends Controller
         }
         $user->delete();
         return response()->json(['code' => 200, 'data' => ['message' => 'berhasil menghapus data']]);
+    }
+
+    public function edit($id)
+    {
+        $user = User::findorFail($id);
+        if ($user) {
+            return response()->json([
+                'code' => 200,
+                'data' => $user
+            ]);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+        $data = $request->validate([
+            'username' => ['required', 'string', 'max:255',  Rule::unique('users', 'username')->whereNull('deleted_at')->ignore($user->id)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')->ignore($user->id)],
+            'password' => 'nullable|confirmed|min:8',
+            'role' => 'required|exists:MRole,id'
+        ]);
+
+        $data['password'] = Hash::make($data['password']);
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($data['password']);
+            $user->password = $data['password'];
+        }
+
+        if (isset($data['role'])) {
+            $user->role_id = $data['role'];
+        }
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->save();
+
+        return response()->json(['code' => 200, 'data' => ['message' => 'berhasil update data']]);
     }
 }
