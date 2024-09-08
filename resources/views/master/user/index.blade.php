@@ -30,7 +30,7 @@
 <!-- /bordered table -->
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Tambah Instruktur</h5>
+        <h5 class="card-title">Form User</h5>
     </div>
 
     <div class="card-body">

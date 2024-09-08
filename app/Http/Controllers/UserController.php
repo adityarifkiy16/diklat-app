@@ -54,7 +54,7 @@ class UserController extends Controller
             [
                 'code' => 200,
                 'data' => [
-                    'message' => 'berhasil menambah user'
+                    'message' => 'Berhasil menambah user ' . $data['username']
                 ]
             ]
         );
@@ -63,16 +63,18 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         $user = User::findorFail($id);
-        if ($user->peserta()->exists()) {
-            return response()->json([
-                'code' => 400,
-                'data' => [
-                    'message' => 'Gagal menghapus data user karena relasi dengan data peserta'
-                ]
-            ]);
+        $isInstruktur = $user->instruktur()->exists();
+        $isPeserta = $user->peserta()->exists();
+        if ($isInstruktur) {
+            $user->instruktur()->delete();
         }
+        if ($isPeserta) {
+            $user->peserta()->delete();
+        }
+
         $user->delete();
-        return response()->json(['code' => 200, 'data' => ['message' => 'berhasil menghapus data']]);
+
+        return response()->json(['code' => 200, 'data' => ['message' => $user->username . ' dan data terkait berhasil dihapus']]);
     }
 
     public function edit($id)
