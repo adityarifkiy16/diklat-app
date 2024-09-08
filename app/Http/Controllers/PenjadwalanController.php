@@ -73,6 +73,7 @@ class PenjadwalanController extends Controller
             'instruc_id.required' => 'Instruktur harus dipilih.',
             'instruc_id.exists' => 'Instruktur yang dipilih tidak valid.'
         ];
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
@@ -85,10 +86,10 @@ class PenjadwalanController extends Controller
 
         $data = $validator->validated();
 
-        // break to an array
+        // break string to array lalu mememasukan ke dalam variabel start dan end
         list($start, $end) = explode(' - ', $data['tgl_jadwal']);
 
-        // create format using carbon
+        // buat format menggunakan carbon
         $data['tgl_mulai'] = Carbon::createFromFormat('m/d/Y h:i a', $start);
         $data['tgl_selesai'] = Carbon::createFromFormat('m/d/Y h:i a', $end);
         $data['instruct_id'] = $data['instruc_id'];
