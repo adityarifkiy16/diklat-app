@@ -16,9 +16,6 @@ class LogoutController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->json([
-            'code' => 200,
-            'message' => 'Success Logout!'
-        ], 200);
+        return redirect(route('login'));
     }
 }
