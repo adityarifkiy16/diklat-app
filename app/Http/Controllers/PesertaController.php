@@ -28,12 +28,12 @@ class PesertaController extends Controller
                 ->toJson();
         }
 
-        return view('peserta.index');
+        return view('master.peserta.index');
     }
 
     public function create()
     {
-        return view('peserta.tambah');
+        return view('master.peserta.tambah');
     }
 
 
@@ -84,7 +84,6 @@ class PesertaController extends Controller
     {
         $peserta = MPeserta::findorFail($id);
         $peserta->delete();
-
         return response()->json(['code' => 200, 'data' => ['message' => 'berhasil menghapus data']]);
     }
 }
