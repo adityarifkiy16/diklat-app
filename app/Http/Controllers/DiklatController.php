@@ -18,12 +18,12 @@ class DiklatController extends Controller
                 ->toJson();
         }
 
-        return view('diklat.index');
+        return view('master.diklat.index');
     }
 
     public function create()
     {
-        return view('diklat.tambah');
+        return view('master.diklat.tambah');
     }
 
     public function store(Request $request)
