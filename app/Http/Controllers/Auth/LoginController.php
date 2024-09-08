@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $rules = [
             'login' => 'required|string',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
         ];
 
         $customMessages = [

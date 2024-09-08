@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiklatController;
+use App\Http\Controllers\InstrukturController;
 use App\Http\Controllers\PendaftaranDiklatController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PesertaController;
@@ -49,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::controller(UserController::class)->prefix('user')->group(function () {
             Route::get('/', 'index')->name('user');
             Route::get('/create', 'create')->name('user.create');
+            Route::get('/edit/{id}', 'edit')->name('user.edit');
+            Route::post('/update/{id}', 'update')->name('user.update');
             Route::post('/store', 'store')->name('user.store');
             Route::delete('/delete/{id}', 'deleteUser');
         });
@@ -70,6 +73,12 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('pendaftaran');
             Route::get('/create', 'create');
             Route::post('/store', 'store');
+        });
+
+        Route::controller(InstrukturController::class)->prefix('instruktur')->group(function () {
+            Route::get('/', 'index')->name('instruktur');
+            Route::post('/store', 'store')->name('instruktur.store');
+            Route::delete('/delete/{id}', 'delete');
         });
     });
     Route::post('/logout', LogoutController::class)->name('logout');

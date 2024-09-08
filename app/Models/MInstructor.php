@@ -17,6 +17,6 @@ class MInstructor extends Model
 
     public function penjadwalan()
     {
-        return $this->hasMany(TPenjadwalan::class);
+        return $this->hasMany(TPenjadwalan::class, 'instruct_id', 'id');
     }
 }
